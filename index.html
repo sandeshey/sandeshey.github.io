@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sandesh</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome for social media icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" xintegrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ96oVnvyS82uHn5M5s5b0d0xYp0p8fD6+y/r7R4b6R9j0D8L5zQ4qU2H+V9w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        /* Define a cool custom color palette */
+        :root {
+            --bg-color: #0b0b1a; /* Very dark blue */
+            --accent-pink: #ff4a88; /* Vibrant pink */
+            --accent-blue: #00d2ff; /* Neon blue */
+            --text-light: #e0e0e0;
+            --card-bg: rgba(25, 25, 45, 0.7); /* Translucent dark blue */
+        }
+
+        /* Use Inter from Google Fonts */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-light);
+            overflow: hidden; /* Prevent any scrollbars */
+        }
+
+        /* Hero section text animation */
+        .animated-text {
+            animation: fadeIn 2s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Cool button styles with hover effect */
+        .cool-button {
+            transition: all 0.3s ease;
+            transform: perspective(1px) translateZ(0);
+        }
+        .cool-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px var(--accent-blue);
+        }
+
+        /* Background Particle Effect */
+        .particle-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0;
+            animation: move-and-fade 10s infinite;
+        }
+
+        @keyframes move-and-fade {
+            0% {
+                transform: translateY(100vh) scale(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            80% {
+                opacity: 0.5;
+            }
+            100% {
+                transform: translateY(-50vh) scale(1.2);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body class="antialiased flex items-center justify-center h-screen">
+
+    <!-- Background Particle Container -->
+    <div class="particle-container"></div>
+
+    <!-- Main Hero Content -->
+    <div class="w-full max-w-2xl text-center p-8 bg-gray-900 bg-opacity-70 rounded-xl card-shadow">
+        
+        <h1 class="text-4xl md:text-6xl font-extrabold text-white leading-tight animated-text">
+            Hello, I'm <span class="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-blue-500">Sandesh</span>
+        </h1>
+        <p class="mt-4 text-xl md:text-2xl text-gray-400 animated-text">
+            A software engineer building cool things.
+        </p>
+
+        <div class="mt-8 flex justify-center space-x-6 text-xl md:text-2xl">
+            <!-- Replace '#' with your actual social media links -->
+            <a href="#" class="text-gray-400 hover:text-accent-blue cool-button">
+                <i class="fab fa-github"></i>
+            </a>
+            <a href="#" class="text-gray-400 hover:text-accent-blue cool-button">
+                <i class="fab fa-linkedin-in"></i>
+            </a>
+            <a href="#" class="text-gray-400 hover:text-accent-blue cool-button">
+                <i class="fas fa-envelope"></i>
+            </a>
+        </div>
+    </div>
+
+    <!-- JavaScript for dynamic particle effect -->
+    <script>
+        const particleContainer = document.querySelector('.particle-container');
+        const colors = ['#ff4a88', '#00d2ff', '#e0e0e0'];
+        const numParticles = 40;
+
+        for (let i = 0; i < numParticles; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            const size = Math.random() * 5 + 3;
+            particle.style.width = `${size}px`;
+            particle.style.height = `${size}px`;
+            particle.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+            particle.style.left = `${Math.random() * 100}vw`;
+            particle.style.animationDelay = `${Math.random() * -10}s`; /* Negative delay for staggered start */
+            particleContainer.appendChild(particle);
+        }
+    </script>
+</body>
+</html>
